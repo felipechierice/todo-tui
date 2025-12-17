@@ -1,0 +1,224 @@
+import React, { useState } from 'react';
+import { Box, Text, useInput } from 'ink';
+import TextInput from 'ink-text-input';
+import { TaskStatus, Priority } from '../types.js';
+
+interface AddTaskViewProps {
+  currentSection: TaskStatus;
+  onSubmit: (text: string, tags: string[], deadline?: string, duration?: string, priority?: Priority) => void;
+  onCancel: () => void;
+}
+
+type Step = 'text' | 'tags' | 'deadline' | 'duration' | 'marker' | 'confirm';
+
+type MarkerOption = { label: string; value: Priority; emoji: string };
+
+const MARKER_OPTIONS: MarkerOption[] = [
+  { label: 'Nenhum', value: 'normal', emoji: '' },
+  { label: 'Importante', value: 'high', emoji: '⚡' },
+  { label: 'Rápida', value: 'quick', emoji: '🚀' },
+];
+
+export const AddTaskView: React.FC<AddTaskViewProps> = ({
+  currentSection,
+  onSubmit,
+  onCancel,
+}) => {
+  const [step, setStep] = useState<Step>('text');
+  const [text, setText] = useState('');
+  const [tagsInput, setTagsInput] = useState('');
+  const [deadline, setDeadline] = useState('');
+  const [duration, setDuration] = useState('');
+  const [markerIndex, setMarkerIndex] = useState(0);
+
+  useInput((input, key) => {
+    if (key.escape) {
+      onCancel();
+      return;
+    }
+    
+    // Handle marker selection
+    if (step === 'marker') {
+      if (key.leftArrow || input === 'h') {
+        setMarkerIndex(i => (i - 1 + MARKER_OPTIONS.length) % MARKER_OPTIONS.length);
+      } else if (key.rightArrow || input === 'l') {
+        setMarkerIndex(i => (i + 1) % MARKER_OPTIONS.length);
+      } else if (key.return) {
+        handleMarkerSubmit();
+      }
+    }
+  });
+
+  const handleTextSubmit = () => {
+    if (text.trim()) {
+      setStep('tags');
+    }
+  };
+
+  const handleTagsSubmit = () => {
+    setStep('deadline');
+  };
+
+  const handleDeadlineSubmit = () => {
+    setStep('duration');
+  };
+
+  const handleDurationSubmit = () => {
+    setStep('marker');
+  };
+
+  const handleMarkerSubmit = () => {
+    const tags = tagsInput
+      .split(/[,\s]+/)
+      .map(t => t.replace('#', '').trim())
+      .filter(t => t.length > 0);
+    
+    const selectedMarker = MARKER_OPTIONS[markerIndex];
+    
+    onSubmit(
+      text.trim(),
+      tags,
+      deadline.trim() || undefined,
+      duration.trim() || undefined,
+      selectedMarker.value
+    );
+  };
+
+  return (
+    <Box flexDirection="column" padding={1}>
+      <Box marginBottom={1}>
+        <Text bold color="green">
+          ╔════════════════════════════════════════╗
+        </Text>
+      </Box>
+      <Box>
+        <Text bold color="green">║</Text>
+        <Text bold color="cyan">        ➕ NOVA TAREFA                   </Text>
+        <Text bold color="green">║</Text>
+      </Box>
+      <Box marginBottom={1}>
+        <Text bold color="green">
+          ╚════════════════════════════════════════╝
+        </Text>
+      </Box>
+
+      <Box marginBottom={1}>
+        <Text color="gray">Seção: </Text>
+        <Text color="yellow">{currentSection.toUpperCase()}</Text>
+      </Box>
+
+      <Box flexDirection="column" marginLeft={2}>
+        <Box>
+          <Text color={step === 'text' ? 'cyan' : 'green'}>
+            {step === 'text' ? '▸ ' : '✓ '}
+          </Text>
+          <Text bold>Tarefa: </Text>
+          {step === 'text' ? (
+            <TextInput
+              value={text}
+              onChange={setText}
+              onSubmit={handleTextSubmit}
+              placeholder="Descreva a tarefa..."
+            />
+          ) : (
+            <Text color="white">{text}</Text>
+          )}
+        </Box>
+
+        {(step === 'tags' || step === 'deadline' || step === 'duration' || step === 'marker' || step === 'confirm') && (
+          <Box marginTop={1}>
+            <Text color={step === 'tags' ? 'cyan' : 'green'}>
+              {step === 'tags' ? '▸ ' : '✓ '}
+            </Text>
+            <Text bold>Tags: </Text>
+            {step === 'tags' ? (
+              <TextInput
+                value={tagsInput}
+                onChange={setTagsInput}
+                onSubmit={handleTagsSubmit}
+                placeholder="trabalho, projeto (separar por vírgula)"
+              />
+            ) : (
+              <Text color="cyan">{tagsInput || '(nenhuma)'}</Text>
+            )}
+          </Box>
+        )}
+
+        {(step === 'deadline' || step === 'duration' || step === 'marker' || step === 'confirm') && (
+          <Box marginTop={1}>
+            <Text color={step === 'deadline' ? 'cyan' : 'green'}>
+              {step === 'deadline' ? '▸ ' : '✓ '}
+            </Text>
+            <Text bold>Prazo: </Text>
+            {step === 'deadline' ? (
+              <TextInput
+                value={deadline}
+                onChange={setDeadline}
+                onSubmit={handleDeadlineSubmit}
+                placeholder="DD/MM (opcional)"
+              />
+            ) : (
+              <Text color="yellow">{deadline || '(sem prazo)'}</Text>
+            )}
+          </Box>
+        )}
+
+        {(step === 'duration' || step === 'marker' || step === 'confirm') && (
+          <Box marginTop={1}>
+            <Text color={step === 'duration' ? 'cyan' : 'green'}>
+              {step === 'duration' ? '▸ ' : '✓ '}
+            </Text>
+            <Text bold>Duração: </Text>
+            {step === 'duration' ? (
+              <TextInput
+                value={duration}
+                onChange={setDuration}
+                onSubmit={handleDurationSubmit}
+                placeholder="30min, 1h (opcional)"
+              />
+            ) : (
+              <Text color="magenta">{duration || '(não definida)'}</Text>
+            )}
+          </Box>
+        )}
+
+        {(step === 'marker' || step === 'confirm') && (
+          <Box marginTop={1}>
+            <Text color={step === 'marker' ? 'cyan' : 'green'}>
+              {step === 'marker' ? '▸ ' : '✓ '}
+            </Text>
+            <Text bold>Marcador: </Text>
+            {step === 'marker' ? (
+              <Box>
+                {MARKER_OPTIONS.map((opt, idx) => (
+                  <Text key={opt.value}>
+                    <Text color={idx === markerIndex ? 'cyan' : 'gray'} bold={idx === markerIndex}>
+                      {idx === markerIndex ? '[' : ' '}
+                      {opt.emoji ? `${opt.emoji} ` : ''}{opt.label}
+                      {idx === markerIndex ? ']' : ' '}
+                    </Text>
+                    {idx < MARKER_OPTIONS.length - 1 && <Text color="gray"> │ </Text>}
+                  </Text>
+                ))}
+              </Box>
+            ) : (
+              <Text color="red">
+                {MARKER_OPTIONS[markerIndex].emoji 
+                  ? `${MARKER_OPTIONS[markerIndex].emoji} ${MARKER_OPTIONS[markerIndex].label}`
+                  : '(nenhum)'}
+              </Text>
+            )}
+          </Box>
+        )}
+      </Box>
+
+      <Box marginTop={2}>
+        <Text color="gray" italic>
+          {step === 'marker' 
+            ? '← → para escolher │ Enter para confirmar │ Esc para cancelar'
+            : 'Enter para confirmar │ Esc para cancelar'}
+        </Text>
+      </Box>
+    </Box>
+  );
+};
