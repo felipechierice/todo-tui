@@ -28,7 +28,7 @@ Gerencie suas tarefas diretamente do terminal com uma interface bonita e control
 ## 📸 Screenshots
 
 <!-- Adicione screenshots aqui quando disponível -->
-_Em breve: Adicione um GIF ou screenshot do app em ação_
+_Em breve.
 
 ## 📑 Índice
 

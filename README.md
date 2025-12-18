@@ -28,7 +28,7 @@ Manage your tasks directly from your terminal with a beautiful, keyboard-driven 
 ## 📸 Screenshots
 
 <!-- Add screenshots here when available -->
-_Coming soon: Add a GIF or screenshot of the app in action_
+_Coming soon.
 
 ## 📑 Table of Contents
 
