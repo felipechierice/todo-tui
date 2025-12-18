@@ -9,12 +9,12 @@ interface MoveTaskViewProps {
 }
 
 const sections: { id: TaskStatus; label: string; key: string }[] = [
-  { id: 'doing', label: '🔥 FAZENDO', key: '1' },
-  { id: 'next', label: '📌 PRÓXIMAS', key: '2' },
-  { id: 'waiting', label: '⏳ ESPERANDO', key: '3' },
-  { id: 'blocked', label: '🚧 BLOQUEADAS', key: '4' },
-  { id: 'ideas', label: '💡 IDEIAS', key: '5' },
-  { id: 'done', label: '✅ CONCLUÍDAS', key: '0' },
+  { id: 'doing', label: '🔥 DOING', key: '1' },
+  { id: 'next', label: '📌 NEXT', key: '2' },
+  { id: 'waiting', label: '⏳ WAITING', key: '3' },
+  { id: 'blocked', label: '🚧 BLOCKED', key: '4' },
+  { id: 'ideas', label: '💡 IDEAS', key: '5' },
+  { id: 'done', label: '✅ DONE', key: '0' },
 ];
 
 export const MoveTaskView: React.FC<MoveTaskViewProps> = ({
@@ -61,7 +61,7 @@ export const MoveTaskView: React.FC<MoveTaskViewProps> = ({
       </Box>
       <Box>
         <Text bold color="magenta">║</Text>
-        <Text bold color="cyan">        📦 MOVER TAREFA                  </Text>
+        <Text bold color="cyan">        📦 MOVE TASK                  </Text>
         <Text bold color="magenta">║</Text>
       </Box>
       <Box marginBottom={1}>
@@ -71,12 +71,12 @@ export const MoveTaskView: React.FC<MoveTaskViewProps> = ({
       </Box>
 
       <Box marginBottom={1}>
-        <Text color="gray">Tarefa: </Text>
+        <Text color="gray">Task: </Text>
         <Text color="white">{task.text}</Text>
       </Box>
 
       <Box marginBottom={1}>
-        <Text bold color="cyan">Mover para:</Text>
+        <Text bold color="cyan">Move to:</Text>
       </Box>
 
       <Box flexDirection="column" marginLeft={2}>
@@ -90,7 +90,7 @@ export const MoveTaskView: React.FC<MoveTaskViewProps> = ({
               {' '}{section.label}
             </Text>
             {task.status === section.id && (
-              <Text color="gray" italic> (atual)</Text>
+              <Text color="gray" italic> (current)</Text>
             )}
           </Box>
         ))}
@@ -98,7 +98,7 @@ export const MoveTaskView: React.FC<MoveTaskViewProps> = ({
 
       <Box marginTop={2}>
         <Text color="gray" italic>
-          ↑↓ selecionar │ Enter/número confirmar │ Esc cancelar
+          ↑↓ select │ Enter/number confirm │ Esc cancel
         </Text>
       </Box>
     </Box>

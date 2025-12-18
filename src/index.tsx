@@ -24,7 +24,7 @@ if (!path.isAbsolute(filePath)) {
 function ensureConfigDir(): void {
   if (!fs.existsSync(CONFIG_DIR)) {
     fs.mkdirSync(CONFIG_DIR, { recursive: true });
-    console.log(`📁 Diretório criado: ${CONFIG_DIR}`);
+    console.log(`📁 Directory created: ${CONFIG_DIR}`);
   }
 }
 
@@ -35,14 +35,14 @@ function ensureDefaultFile(): void {
     if (filePath === DEFAULT_FILE) {
       ensureConfigDir();
       fs.writeFileSync(filePath, DEFAULT_TEMPLATE, 'utf-8');
-      console.log(`📄 Arquivo criado: ${filePath}`);
+      console.log(`📄 File created: ${filePath}`);
       console.log('');
     } else {
       // Custom path specified but doesn't exist
-      console.error(`❌ Arquivo não encontrado: ${filePath}`);
-      console.log('\nUso: todo [arquivo.md]');
-      console.log('Exemplo: todo ~/meu-todo.md');
-      console.log(`\nSe nenhum arquivo for especificado, usa: ${DEFAULT_FILE}`);
+      console.error(`❌ File not found: ${filePath}`);
+      console.log('\nUsage: todo [file.md]');
+      console.log('Example: todo ~/my-todo.md');
+      console.log(`\nIf no file is specified, uses: ${DEFAULT_FILE}`);
       process.exit(1);
     }
   }

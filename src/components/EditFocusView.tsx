@@ -34,7 +34,7 @@ export const EditFocusView: React.FC<EditFocusViewProps> = ({
       </Box>
       <Box>
         <Text bold color="magenta">║</Text>
-        <Text bold color="cyan">        🎯 FOCO DE HOJE                  </Text>
+        <Text bold color="cyan">        🎯 TODAY'S FOCUS                  </Text>
         <Text bold color="magenta">║</Text>
       </Box>
       <Box marginBottom={1}>
@@ -44,25 +44,25 @@ export const EditFocusView: React.FC<EditFocusViewProps> = ({
       </Box>
 
       <Box marginBottom={1}>
-        <Text color="gray">Defina suas prioridades do dia (1-3 itens principais)</Text>
+        <Text color="gray">Define your priorities for the day (1-3 main items)</Text>
       </Box>
 
       <Box flexDirection="column" marginLeft={2}>
         <Box>
           <Text color="cyan">▸ </Text>
-          <Text bold>Foco: </Text>
+          <Text bold>Focus: </Text>
           <TextInput
             value={focus}
             onChange={setFocus}
             onSubmit={handleSubmit}
-            placeholder="Ex: Finalizar relatório, Reunião com cliente"
+            placeholder="E.g.: Finish report, Client meeting"
           />
         </Box>
       </Box>
 
       <Box marginTop={2}>
         <Text color="gray" italic>
-          Enter para confirmar │ Esc para cancelar
+          Enter to confirm │ Esc to cancel
         </Text>
       </Box>
     </Box>

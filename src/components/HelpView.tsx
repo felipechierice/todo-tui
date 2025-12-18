@@ -21,7 +21,7 @@ export const HelpView: React.FC<HelpViewProps> = ({ onClose, maxHeight }) => {
       </Box>
       <Box>
         <Text bold color="yellow">║</Text>
-        <Text bold color="cyan">        📖 AJUDA - Atalhos              </Text>
+        <Text bold color="cyan">        📖 HELP - Shortcuts              </Text>
         <Text bold color="yellow">║</Text>
       </Box>
       <Box marginBottom={1}>
@@ -31,48 +31,48 @@ export const HelpView: React.FC<HelpViewProps> = ({ onClose, maxHeight }) => {
       </Box>
 
       <Box flexDirection="column" marginLeft={2} flexGrow={1} overflow="hidden">
-        <Text bold color="cyan">Navegação:</Text>
-        <Text>  <Text color="white">↑ / k</Text>     <Text color="gray">Tarefa anterior</Text></Text>
-        <Text>  <Text color="white">↓ / j</Text>     <Text color="gray">Próxima tarefa</Text></Text>
-        <Text>  <Text color="white">← / h</Text>     <Text color="gray">Seção anterior</Text></Text>
-        <Text>  <Text color="white">→ / l</Text>     <Text color="gray">Próxima seção</Text></Text>
-        <Text>  <Text color="white">Tab</Text>       <Text color="gray">Próxima seção</Text></Text>
+        <Text bold color="cyan">Navigation:</Text>
+        <Text>  <Text color="white">↑ / k</Text>     <Text color="gray">Previous task</Text></Text>
+        <Text>  <Text color="white">↓ / j</Text>     <Text color="gray">Next task</Text></Text>
+        <Text>  <Text color="white">← / h</Text>     <Text color="gray">Previous section</Text></Text>
+        <Text>  <Text color="white">→ / l</Text>     <Text color="gray">Next section</Text></Text>
+        <Text>  <Text color="white">Tab</Text>       <Text color="gray">Next section</Text></Text>
 
         <Box marginTop={1}>
-          <Text bold color="cyan">Seleção (multi-tarefa):</Text>
+          <Text bold color="cyan">Selection (multi-task):</Text>
         </Box>
-        <Text>  <Text color="white">Espaço</Text>    <Text color="gray">Selecionar/desselecionar tarefa</Text></Text>
-        <Text>  <Text color="white">s</Text>         <Text color="gray">Toggle seleção do grupo atual</Text></Text>
-        <Text>  <Text color="white">S</Text>         <Text color="gray">Toggle seleção de TODAS as tarefas</Text></Text>
+        <Text>  <Text color="white">Space</Text>    <Text color="gray">Select/deselect task</Text></Text>
+        <Text>  <Text color="white">s</Text>         <Text color="gray">Toggle selection of current group</Text></Text>
+        <Text>  <Text color="white">S</Text>         <Text color="gray">Toggle selection of ALL tasks</Text></Text>
 
         <Box marginTop={1}>
-          <Text bold color="cyan">Ações:</Text>
+          <Text bold color="cyan">Actions:</Text>
         </Box>
-        <Text>  <Text color="white">Enter</Text>     <Text color="gray">Concluir (selecionadas ou atual)</Text></Text>
-        <Text>  <Text color="white">a</Text>         <Text color="gray">Adicionar nova tarefa</Text></Text>
-        <Text>  <Text color="white">e</Text>         <Text color="gray">Editar tarefa atual</Text></Text>
-        <Text>  <Text color="white">f</Text>         <Text color="gray">Editar foco do dia</Text></Text>
-        <Text>  <Text color="white">d</Text>         <Text color="gray">Deletar (selecionadas ou atual)</Text></Text>
-        <Text>  <Text color="white">m</Text>         <Text color="gray">Mover (selecionadas ou atual)</Text></Text>
-        <Text>  <Text color="white">K</Text>         <Text color="gray">Mover tarefa(s) para cima/grupo anterior</Text></Text>
-        <Text>  <Text color="white">J</Text>         <Text color="gray">Mover tarefa(s) para baixo/próximo grupo</Text></Text>
+        <Text>  <Text color="white">Enter</Text>     <Text color="gray">Complete (selected or current)</Text></Text>
+        <Text>  <Text color="white">a</Text>         <Text color="gray">Add new task</Text></Text>
+        <Text>  <Text color="white">e</Text>         <Text color="gray">Edit current task</Text></Text>
+        <Text>  <Text color="white">f</Text>         <Text color="gray">Edit today's focus</Text></Text>
+        <Text>  <Text color="white">d</Text>         <Text color="gray">Delete (selected or current)</Text></Text>
+        <Text>  <Text color="white">m</Text>         <Text color="gray">Move (selected or current)</Text></Text>
+        <Text>  <Text color="white">K</Text>         <Text color="gray">Move task(s) up/previous group</Text></Text>
+        <Text>  <Text color="white">J</Text>         <Text color="gray">Move task(s) down/next group</Text></Text>
 
         <Box marginTop={1}>
-          <Text bold color="cyan">Mover rápido (números):</Text>
+          <Text bold color="cyan">Quick move (numbers):</Text>
         </Box>
-        <Text>  <Text color="white">1</Text> Fazendo  <Text color="white">2</Text> Próximas  <Text color="white">3</Text> Esperando</Text>
-        <Text>  <Text color="white">4</Text> Bloqueadas  <Text color="white">5</Text> Ideias  <Text color="white">0</Text> Concluídas</Text>
+        <Text>  <Text color="white">1</Text> Doing  <Text color="white">2</Text> Next  <Text color="white">3</Text> Waiting</Text>
+        <Text>  <Text color="white">4</Text> Blocked  <Text color="white">5</Text> Ideas  <Text color="white">0</Text> Done</Text>
 
         <Box marginTop={1}>
-          <Text bold color="cyan">Geral:</Text>
+          <Text bold color="cyan">General:</Text>
         </Box>
-        <Text>  <Text color="white">r</Text>         <Text color="gray">Recarregar arquivo</Text></Text>
-        <Text>  <Text color="white">?</Text>         <Text color="gray">Mostrar/Esconder ajuda</Text></Text>
-        <Text>  <Text color="white">q / Esc</Text>   <Text color="gray">Sair / Fechar</Text></Text>
+        <Text>  <Text color="white">r</Text>         <Text color="gray">Reload file</Text></Text>
+        <Text>  <Text color="white">?</Text>         <Text color="gray">Show/Hide help</Text></Text>
+        <Text>  <Text color="white">q / Esc</Text>   <Text color="gray">Quit / Close</Text></Text>
       </Box>
 
       <Box marginTop={1}>
-        <Text color="gray" italic>Pressione qualquer tecla para fechar...</Text>
+        <Text color="gray" italic>Press any key to close...</Text>
       </Box>
     </Box>
   );

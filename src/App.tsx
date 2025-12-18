@@ -82,7 +82,7 @@ export const App: React.FC<AppProps> = ({ filePath }) => {
       const parsed = parseMarkdown(content);
       setData(parsed);
     } catch (err) {
-      setMessage(`Erro ao ler arquivo: ${err}`);
+      setMessage(`Error reading file: ${err}`);
     }
   }, [filePath]);
 
@@ -100,7 +100,7 @@ export const App: React.FC<AppProps> = ({ filePath }) => {
 
     watcher.on('change', () => {
       loadData();
-      setMessage('📄 Arquivo atualizado externamente');
+      setMessage('📄 File updated externally');
       setTimeout(() => setMessage(''), 3000);
     });
 
@@ -123,7 +123,7 @@ export const App: React.FC<AppProps> = ({ filePath }) => {
 
     // Calculate total lines needed for all sections
     const sectionHeights = data.sections.map(section => {
-      // 2 lines for header + 1 line per task (min 1 for "Nenhuma tarefa")
+      // 2 lines for header + 1 line per task (min 1 for "No tasks")
       return 2 + Math.max(section.tasks.length, 1);
     });
 
@@ -267,9 +267,9 @@ export const App: React.FC<AppProps> = ({ filePath }) => {
     });
     
     if (allSelected) {
-      showMessage(`🔄 ${currentSection.tasks.length} tarefa(s) desselecionada(s)`);
+      showMessage(`🔄 ${currentSection.tasks.length} task(s) deselected`);
     } else {
-      showMessage(`✅ ${currentSection.tasks.length} tarefa(s) selecionada(s)`);
+      showMessage(`✅ ${currentSection.tasks.length} task(s) selected`);
     }
   };
 
@@ -287,11 +287,11 @@ export const App: React.FC<AppProps> = ({ filePath }) => {
     if (allSelected) {
       // Deselect all
       setSelectedTaskIds(new Set());
-      showMessage(`🔄 Todas as ${allTasks.length} tarefas desselecionadas`);
+      showMessage(`🔄 All ${allTasks.length} tasks deselected`);
     } else {
       // Select all
       setSelectedTaskIds(new Set(allTasks.map(t => t.id)));
-      showMessage(`✅ Todas as ${allTasks.length} tarefas selecionadas`);
+      showMessage(`✅ All ${allTasks.length} tasks selected`);
     }
   };
 
@@ -326,9 +326,9 @@ export const App: React.FC<AppProps> = ({ filePath }) => {
         const taskIndex = destSection.tasks.findIndex(t => t.text === task.text);
         setSelectedTask(taskIndex >= 0 ? taskIndex : 0);
       }
-      showMessage(task.completed ? '↩️ Tarefa reaberta' : '✅ Tarefa concluída!');
+      showMessage(task.completed ? '↩️ Task reopened' : '✅ Task completed!');
     } else {
-      showMessage(`✅ ${tasksToToggle.length} tarefa(s) processada(s)`);
+      showMessage(`✅ ${tasksToToggle.length} task(s) processed`);
     }
   };
 
@@ -338,7 +338,7 @@ export const App: React.FC<AppProps> = ({ filePath }) => {
     addTaskToFile(filePath, newTask);
     loadData();
     setViewMode('list');
-    showMessage('➕ Tarefa adicionada!');
+    showMessage('➕ Task added!');
   };
 
   const handleEditTask = (text: string, tags: string[], deadline?: string, duration?: string, priority?: 'high' | 'normal' | 'quick') => {
@@ -357,14 +357,14 @@ export const App: React.FC<AppProps> = ({ filePath }) => {
     updateTaskInFile(filePath, currentTask, updatedTask);
     loadData();
     setViewMode('list');
-    showMessage('✏️ Tarefa atualizada!');
+    showMessage('✏️ Task updated!');
   };
 
   const handleEditFocus = (newFocus: string) => {
     updateFocusToday(filePath, newFocus);
     loadData();
     setViewMode('list');
-    showMessage('🎯 Foco do dia atualizado!');
+    showMessage('🎯 Today\'s focus updated!');
   };
 
   const handleDeleteTask = () => {
@@ -384,7 +384,7 @@ export const App: React.FC<AppProps> = ({ filePath }) => {
     if (selectedTask > 0) {
       setSelectedTask(prev => Math.max(0, prev - tasksToDelete.length));
     }
-    showMessage(`🗑️ ${tasksToDelete.length} tarefa(s) removida(s)`);
+    showMessage(`🗑️ ${tasksToDelete.length} task(s) removed`);
   };
 
   const handleReorderTask = (direction: 'up' | 'down') => {
@@ -417,7 +417,7 @@ export const App: React.FC<AppProps> = ({ filePath }) => {
     }
     
     if (!anyMoved) {
-      showMessage(direction === 'up' ? '⚠️ Já está no topo' : '⚠️ Já está no final');
+      showMessage(direction === 'up' ? '⚠️ Already at top' : '⚠️ Already at bottom');
       return;
     }
     
@@ -458,14 +458,14 @@ export const App: React.FC<AppProps> = ({ filePath }) => {
       }
       
       const statusNames: Record<TaskStatus, string> = {
-        doing: 'FAZENDO',
-        next: 'PRÓXIMAS',
-        waiting: 'ESPERANDO',
-        blocked: 'BLOQUEADAS',
-        ideas: 'IDEIAS',
-        done: 'CONCLUÍDAS',
+        doing: 'DOING',
+        next: 'NEXT',
+        waiting: 'WAITING',
+        blocked: 'BLOCKED',
+        ideas: 'IDEAS',
+        done: 'DONE',
       };
-      showMessage(`📦 ${tasksToReorder.length} tarefa(s) movida(s) para ${statusNames[movedToSection]}`);
+      showMessage(`📦 ${tasksToReorder.length} task(s) moved to ${statusNames[movedToSection]}`);
     } else {
       // Just reordered within section
       if (!hadSelection && currentSection) {
@@ -476,7 +476,7 @@ export const App: React.FC<AppProps> = ({ filePath }) => {
           setSelectedTask(prev => prev + 1);
         }
       }
-      showMessage(direction === 'up' ? '⬆️ Tarefa(s) movida(s) para cima' : '⬇️ Tarefa(s) movida(s) para baixo');
+      showMessage(direction === 'up' ? '⬆️ Task(s) moved up' : '⬇️ Task(s) moved down');
     }
   };
 
@@ -515,14 +515,14 @@ export const App: React.FC<AppProps> = ({ filePath }) => {
     setViewMode('list');
     
     const statusNames: Record<TaskStatus, string> = {
-      doing: 'FAZENDO',
-      next: 'PRÓXIMAS',
-      waiting: 'ESPERANDO',
-      blocked: 'BLOQUEADAS',
-      ideas: 'IDEIAS',
-      done: 'CONCLUÍDAS',
+      doing: 'DOING',
+      next: 'NEXT',
+      waiting: 'WAITING',
+      blocked: 'BLOCKED',
+      ideas: 'IDEAS',
+      done: 'DONE',
     };
-    showMessage(`📦 ${tasksToMove.length} tarefa(s) movida(s) para ${statusNames[newStatus]}`);
+    showMessage(`📦 ${tasksToMove.length} task(s) moved to ${statusNames[newStatus]}`);
   };
 
   useInput((input, key) => {
@@ -649,7 +649,7 @@ export const App: React.FC<AppProps> = ({ filePath }) => {
           // First press - ask for confirmation
           const count = selectedTaskIds.size > 0 ? selectedTaskIds.size : 1;
           setPendingDelete(true);
-          showMessage(`⚠️ Deletar ${count} tarefa(s)? Pressione 'd' novamente para confirmar`);
+          showMessage(`⚠️ Delete ${count} task(s)? Press 'd' again to confirm`);
         }
         return;
       }
@@ -661,7 +661,7 @@ export const App: React.FC<AppProps> = ({ filePath }) => {
 
       if (input === 'r') {
         loadData();
-        showMessage('🔄 Arquivo recarregado');
+        showMessage('🔄 File reloaded');
         return;
       }
 
@@ -695,7 +695,7 @@ export const App: React.FC<AppProps> = ({ filePath }) => {
   if (!data) {
     return (
       <Box flexDirection="column" padding={1}>
-        <Text color="red">Carregando...</Text>
+        <Text color="red">Loading...</Text>
       </Box>
     );
   }
@@ -772,7 +772,7 @@ export const App: React.FC<AppProps> = ({ filePath }) => {
         {visibleContent.sectionScrollInfo?.hasMore && (
           <Box marginLeft={2}>
             <Text color="gray" italic>
-              ... mais seções (use ←→ para navegar)
+              ... more sections (use ←→ to navigate)
             </Text>
           </Box>
         )}
@@ -785,7 +785,7 @@ export const App: React.FC<AppProps> = ({ filePath }) => {
           selectedCount={selectedTaskIds.size}
           scrollInfo={
             visibleContent.sectionScrollInfo
-              ? `Seção ${visibleContent.sectionScrollInfo.current}/${visibleContent.sectionScrollInfo.total}`
+              ? `Section ${visibleContent.sectionScrollInfo.current}/${visibleContent.sectionScrollInfo.total}`
               : undefined
           }
         />

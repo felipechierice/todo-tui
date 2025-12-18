@@ -1,12 +1,12 @@
 import { Task, Section, TodoData, TaskStatus, Priority } from '../types.js';
 
 const SECTION_MAP: Record<string, { id: TaskStatus; emoji: string }> = {
-  'FAZENDO': { id: 'doing', emoji: '🔥' },
-  'PRÓXIMAS': { id: 'next', emoji: '📌' },
-  'ESPERANDO': { id: 'waiting', emoji: '⏳' },
-  'BLOQUEADAS': { id: 'blocked', emoji: '🚧' },
-  'IDEIAS': { id: 'ideas', emoji: '💡' },
-  'CONCLUÍDAS': { id: 'done', emoji: '✅' },
+  'DOING': { id: 'doing', emoji: '🔥' },
+  'NEXT': { id: 'next', emoji: '📌' },
+  'WAITING': { id: 'waiting', emoji: '⏳' },
+  'BLOCKED': { id: 'blocked', emoji: '🚧' },
+  'IDEAS': { id: 'ideas', emoji: '💡' },
+  'DONE': { id: 'done', emoji: '✅' },
 };
 
 let taskIdCounter = 0;
@@ -46,10 +46,10 @@ function extractCompletedDate(text: string): string | undefined {
 }
 
 function determinePriority(text: string, subsection: string): Priority {
-  if (text.includes('⚡') || subsection.toLowerCase().includes('alta prioridade')) {
+  if (text.includes('⚡') || subsection.toLowerCase().includes('high priority')) {
     return 'high';
   }
-  if (subsection.toLowerCase().includes('rápidas') || text.includes('🚀')) {
+  if (subsection.toLowerCase().includes('quick') || text.includes('🚀')) {
     return 'quick';
   }
   return 'normal';
@@ -107,7 +107,7 @@ export function parseMarkdown(content: string): TodoData {
 
   for (const line of lines) {
     // Extract focus of the day
-    if (line.includes('**Foco de hoje:**')) {
+    if (line.includes('**Today\'s focus:**')) {
       const match = line.match(/_\[?([^\]_]*)\]?_/);
       focusToday = match ? match[1] : '';
       continue;

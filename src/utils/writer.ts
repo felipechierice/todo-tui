@@ -6,23 +6,23 @@ import { Task, TaskStatus } from '../types.js';
 // ============================================================================
 
 const SECTION_KEYWORDS: Record<TaskStatus, string> = {
-  doing: 'FAZENDO',
-  next: 'PRÓXIMAS',
-  waiting: 'ESPERANDO',
-  blocked: 'BLOQUEADAS',
-  ideas: 'IDEIAS',
-  done: 'CONCLUÍDAS',
+  doing: 'DOING',
+  next: 'NEXT',
+  waiting: 'WAITING',
+  blocked: 'BLOCKED',
+  ideas: 'IDEAS',
+  done: 'DONE',
 };
 
 const SECTION_ORDER: TaskStatus[] = ['doing', 'next', 'waiting', 'blocked', 'ideas', 'done'];
 
 const KEYWORD_TO_STATUS: Record<string, TaskStatus> = {
-  'FAZENDO': 'doing',
-  'PRÓXIMAS': 'next',
-  'ESPERANDO': 'waiting',
-  'BLOQUEADAS': 'blocked',
-  'IDEIAS': 'ideas',
-  'CONCLUÍDAS': 'done',
+  'DOING': 'doing',
+  'NEXT': 'next',
+  'WAITING': 'waiting',
+  'BLOCKED': 'blocked',
+  'IDEAS': 'ideas',
+  'DONE': 'done',
 };
 
 // ============================================================================
@@ -233,9 +233,9 @@ export function updateFocusToday(filePath: string, newFocus: string): void {
   const lines = fs.readFileSync(filePath, 'utf-8').split('\n');
   
   for (let i = 0; i < lines.length; i++) {
-    if (lines[i].includes('**Foco de hoje:**')) {
+    if (lines[i].includes('**Today\'s focus:**')) {
       // Replace the focus line with new content
-      lines[i] = `> **Foco de hoje:** _${newFocus || '[escreva 1-3 coisas principais do dia]'}_`;
+      lines[i] = `> **Today's focus:** _${newFocus || '[write 1-3 main things for the day]'}_`;
       fs.writeFileSync(filePath, lines.join('\n'), 'utf-8');
       return;
     }
@@ -245,7 +245,7 @@ export function updateFocusToday(filePath: string, newFocus: string): void {
 export function moveTaskInFile(filePath: string, task: Task, newStatus: TaskStatus): void {
   removeTaskFromFile(filePath, task);
 
-  // Auto-complete when moving to CONCLUÍDAS, auto-uncomplete when leaving
+  // Auto-complete when moving to DONE, auto-uncomplete when leaving
   const isMovingToDone = newStatus === 'done';
   
   const updatedTask: Task = {
@@ -263,7 +263,7 @@ export function toggleTaskInFile(filePath: string, task: Task): void {
   if (!task.completed) {
     moveTaskInFile(filePath, task, 'done');
   } else {
-    // Reopen: move back to PRÓXIMAS
+    // Reopen: move back to NEXT
     removeTaskFromFile(filePath, task);
     const updatedTask: Task = {
       ...task,
@@ -286,7 +286,7 @@ export type ReorderResult =
   | { moved: true; type: 'section_change'; newStatus: TaskStatus };
 
 /** 
- * Transform task line when moving to/from CONCLUÍDAS
+ * Transform task line when moving to/from DONE
  * - Moving TO done: mark as completed, add date
  * - Moving FROM done: unmark, remove strikethrough and date
  */
@@ -294,7 +294,7 @@ function transformTaskForSection(taskLine: string, fromStatus: TaskStatus, toSta
   let line = taskLine;
   
   if (toStatus === 'done' && fromStatus !== 'done') {
-    // Moving TO CONCLUÍDAS: mark as completed
+    // Moving TO DONE: mark as completed
     line = line.replace('- [ ]', '- [x]');
     // Add strikethrough to text (after checkbox, before tags)
     const match = line.match(/^(- \[x\] )(.+?)(\s*`|$)/);
@@ -306,7 +306,7 @@ function transformTaskForSection(taskLine: string, fromStatus: TaskStatus, toSta
       line = line.trimEnd() + ` ✓ ${getCurrentDate()}`;
     }
   } else if (fromStatus === 'done' && toStatus !== 'done') {
-    // Moving FROM CONCLUÍDAS: unmark
+    // Moving FROM DONE: unmark
     line = line.replace('- [x]', '- [ ]');
     // Remove strikethrough
     line = line.replace(/~~(.+?)~~/g, '$1');

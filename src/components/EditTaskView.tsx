@@ -14,9 +14,9 @@ type Step = 'text' | 'tags' | 'deadline' | 'duration' | 'marker' | 'confirm';
 type MarkerOption = { label: string; value: Priority; emoji: string };
 
 const MARKER_OPTIONS: MarkerOption[] = [
-  { label: 'Nenhum', value: 'normal', emoji: '' },
-  { label: 'Importante', value: 'high', emoji: '⚡' },
-  { label: 'Rápida', value: 'quick', emoji: '🚀' },
+  { label: 'None', value: 'normal', emoji: '' },
+  { label: 'Important', value: 'high', emoji: '⚡' },
+  { label: 'Quick', value: 'quick', emoji: '🚀' },
 ];
 
 function getMarkerIndexFromPriority(priority: Priority): number {
@@ -97,7 +97,7 @@ export const EditTaskView: React.FC<EditTaskViewProps> = ({
       </Box>
       <Box>
         <Text bold color="yellow">║</Text>
-        <Text bold color="cyan">        ✏️  EDITAR TAREFA                 </Text>
+        <Text bold color="cyan">        ✏️  EDIT TASK                 </Text>
         <Text bold color="yellow">║</Text>
       </Box>
       <Box marginBottom={1}>
@@ -107,7 +107,7 @@ export const EditTaskView: React.FC<EditTaskViewProps> = ({
       </Box>
 
       <Box marginBottom={1}>
-        <Text color="gray">Seção: </Text>
+        <Text color="gray">Section: </Text>
         <Text color="yellow">{task.status.toUpperCase()}</Text>
       </Box>
 
@@ -116,13 +116,13 @@ export const EditTaskView: React.FC<EditTaskViewProps> = ({
           <Text color={step === 'text' ? 'cyan' : 'green'}>
             {step === 'text' ? '▸ ' : '✓ '}
           </Text>
-          <Text bold>Tarefa: </Text>
+          <Text bold>Task: </Text>
           {step === 'text' ? (
             <TextInput
               value={text}
               onChange={setText}
               onSubmit={handleTextSubmit}
-              placeholder="Descreva a tarefa..."
+              placeholder="Describe the task..."
             />
           ) : (
             <Text color="white">{text}</Text>
@@ -140,10 +140,10 @@ export const EditTaskView: React.FC<EditTaskViewProps> = ({
                 value={tagsInput}
                 onChange={setTagsInput}
                 onSubmit={handleTagsSubmit}
-                placeholder="trabalho, projeto (separar por vírgula)"
+                placeholder="work, project (comma separated)"
               />
             ) : (
-              <Text color="cyan">{tagsInput || '(nenhuma)'}</Text>
+              <Text color="cyan">{tagsInput || '(none)'}</Text>
             )}
           </Box>
         )}
@@ -153,16 +153,16 @@ export const EditTaskView: React.FC<EditTaskViewProps> = ({
             <Text color={step === 'deadline' ? 'cyan' : 'green'}>
               {step === 'deadline' ? '▸ ' : '✓ '}
             </Text>
-            <Text bold>Prazo: </Text>
+            <Text bold>Deadline: </Text>
             {step === 'deadline' ? (
               <TextInput
                 value={deadline}
                 onChange={setDeadline}
                 onSubmit={handleDeadlineSubmit}
-                placeholder="DD/MM (opcional)"
+                placeholder="DD/MM (optional)"
               />
             ) : (
-              <Text color="yellow">{deadline || '(sem prazo)'}</Text>
+              <Text color="yellow">{deadline || '(no deadline)'}</Text>
             )}
           </Box>
         )}
@@ -172,16 +172,16 @@ export const EditTaskView: React.FC<EditTaskViewProps> = ({
             <Text color={step === 'duration' ? 'cyan' : 'green'}>
               {step === 'duration' ? '▸ ' : '✓ '}
             </Text>
-            <Text bold>Duração: </Text>
+            <Text bold>Duration: </Text>
             {step === 'duration' ? (
               <TextInput
                 value={duration}
                 onChange={setDuration}
                 onSubmit={handleDurationSubmit}
-                placeholder="30min, 1h (opcional)"
+                placeholder="30min, 1h (optional)"
               />
             ) : (
-              <Text color="magenta">{duration || '(não definida)'}</Text>
+              <Text color="magenta">{duration || '(not set)'}</Text>
             )}
           </Box>
         )}
@@ -191,7 +191,7 @@ export const EditTaskView: React.FC<EditTaskViewProps> = ({
             <Text color={step === 'marker' ? 'cyan' : 'green'}>
               {step === 'marker' ? '▸ ' : '✓ '}
             </Text>
-            <Text bold>Marcador: </Text>
+            <Text bold>Marker: </Text>
             {step === 'marker' ? (
               <Box>
                 {MARKER_OPTIONS.map((opt, idx) => (
@@ -209,7 +209,7 @@ export const EditTaskView: React.FC<EditTaskViewProps> = ({
               <Text color="red">
                 {MARKER_OPTIONS[markerIndex].emoji 
                   ? `${MARKER_OPTIONS[markerIndex].emoji} ${MARKER_OPTIONS[markerIndex].label}`
-                  : '(nenhum)'}
+                  : '(none)'}
               </Text>
             )}
           </Box>
@@ -219,8 +219,8 @@ export const EditTaskView: React.FC<EditTaskViewProps> = ({
       <Box marginTop={2}>
         <Text color="gray" italic>
           {step === 'marker' 
-            ? '← → para escolher │ Enter para confirmar │ Esc para cancelar'
-            : 'Enter para confirmar │ Esc para cancelar'}
+            ? '← → to choose │ Enter to confirm │ Esc to cancel'
+            : 'Enter to confirm │ Esc to cancel'}
         </Text>
       </Box>
     </Box>

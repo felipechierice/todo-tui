@@ -16,7 +16,7 @@ export const Header: React.FC<HeaderProps> = ({ focusToday }) => {
       <Box>
         <Text bold color="cyan">║</Text>
         <Text bold color="yellow">  📋 TODO TUI </Text>
-        <Text dimColor>- Gerenciador de Tarefas</Text>
+        <Text dimColor>- Task Manager</Text>
         <Box flexGrow={1} />
         <Text bold color="cyan">║</Text>
       </Box>
@@ -27,7 +27,7 @@ export const Header: React.FC<HeaderProps> = ({ focusToday }) => {
       </Box>
       {focusToday && (
         <Box marginTop={1}>
-          <Text bold color="magenta">🎯 Foco de hoje: </Text>
+          <Text bold color="magenta">🎯 Today's focus: </Text>
           <Text color="white">{focusToday}</Text>
         </Box>
       )}

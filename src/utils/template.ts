@@ -1,22 +1,22 @@
-export const DEFAULT_TEMPLATE = `# 📋 TAREFAS
+export const DEFAULT_TEMPLATE = `# 📋 TASKS
 
-> **Foco de hoje:** _[escreva 1-3 coisas principais do dia]_
+> **Today's focus:** _[write 1-3 main things for the day]_
 
-## 🔥 FAZENDO (máx. 3)
+## 🔥 DOING (max. 3)
 
-- [ ] Minha primeira tarefa \`#pessoal\`
+- [ ] My first task \`#personal\`
 
-## 📌 PRÓXIMAS
+## 📌 NEXT
 
-- [ ] Exemplo de tarefa \`#trabalho\` \`~1h\`
+- [ ] Example task \`#work\` \`~1h\`
 
-## ⏳ ESPERANDO
+## ⏳ WAITING
 
-## 🚧 BLOQUEADAS
+## 🚧 BLOCKED
 
-## 💡 IDEIAS
+## 💡 IDEAS
 
-- [ ] Ideia para o futuro
+- [ ] Future idea
 
-## ✅ CONCLUÍDAS
+## ✅ DONE
 `;

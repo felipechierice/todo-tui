@@ -50,10 +50,10 @@ export const SectionView: React.FC<SectionViewProps> = ({
         </Text>
         <Text color="gray"> ({taskCount})</Text>
         {selectedInSection > 0 && (
-          <Text color="yellow"> [{selectedInSection} selecionada(s)]</Text>
+          <Text color="yellow"> [{selectedInSection} selected]</Text>
         )}
         {collapsed && taskCount > 0 && (
-          <Text color="gray" italic> [recolhido]</Text>
+          <Text color="gray" italic> [collapsed]</Text>
         )}
       </Box>
 
@@ -61,12 +61,12 @@ export const SectionView: React.FC<SectionViewProps> = ({
         <Box flexDirection="column" marginLeft={2}>
           {hasScrollUp && (
             <Box>
-              <Text color="gray">  ↑ mais {window.start} tarefa(s) acima</Text>
+              <Text color="gray">  ↑ {window.start} more task(s) above</Text>
             </Box>
           )}
 
           {visibleTasks.length === 0 ? (
-            <Text color="gray" italic>  Nenhuma tarefa</Text>
+            <Text color="gray" italic>  No tasks</Text>
           ) : (
             visibleTasks.map((task, idx) => {
               const actualIndex = window.start + idx;
@@ -86,7 +86,7 @@ export const SectionView: React.FC<SectionViewProps> = ({
 
           {hasScrollDown && (
             <Box>
-              <Text color="gray">  ↓ mais {section.tasks.length - window.end} tarefa(s) abaixo</Text>
+              <Text color="gray">  ↓ {section.tasks.length - window.end} more task(s) below</Text>
             </Box>
           )}
         </Box>
