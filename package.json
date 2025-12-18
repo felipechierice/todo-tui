@@ -1,6 +1,6 @@
 {
   "name": "todo-tui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A beautiful terminal UI for managing tasks in Markdown files with vim-like navigation",
   "type": "module",
   "main": "dist/index.js",
