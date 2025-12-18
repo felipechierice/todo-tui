@@ -60,44 +60,25 @@ _Coming soon.
 
 ## 🚀 Installation
 
-### From Source (Recommended for now)
+### Quick Start with npx (Recommended)
+
+No installation needed! Just run:
 
 ```bash
-# Clone the repository
-git clone https://github.com/felipechierice/todo-tui.git
-cd todo-tui
-
-# Install dependencies
-pnpm install
-# or: npm install
-
-# Build
-pnpm build
-# or: npm run build
-
-# Link globally
-npm link
-```
-
-After that, you can use the `todo` command from anywhere:
-
-```bash
-# Use default file
-todo
+# Use default file (~/.config/todo-tui/TODO.md)
+npx todo-tui
 
 # Specify custom file
-todo ~/my-todo.md
+npx todo-tui ~/my-todo.md
 ```
 
-### NPM Installation (Coming Soon)
-
-Once published to npm:
+### Global Installation
 
 ```bash
-# Global installation
+# With npm
 npm install -g todo-tui
 
-# Or with pnpm
+# With pnpm
 pnpm add -g todo-tui
 ```
 

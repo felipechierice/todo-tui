@@ -61,11 +61,43 @@ _Em breve.
 
 ## 🚀 Instalação
 
-### Instalação Global (Recomendado)
+### Início Rápido com npx (Recomendado)
+
+Sem necessidade de instalação! Apenas execute:
+
+```bash
+# Usar arquivo padrão (~/.config/todo-tui/TODO.md)
+npx todo-tui
+
+# Especificar arquivo customizado
+npx todo-tui ~/meu-todo.md
+```
+
+### Instalação Global
+
+```bash
+# Com npm
+npm install -g todo-tui
+
+# Com pnpm
+pnpm add -g todo-tui
+```
+
+Após instalação global, use o comando `todo` de qualquer lugar:
+
+```bash
+# Usar arquivo padrão
+todo
+
+# Especificar arquivo customizado
+todo ~/meu-todo.md
+```
+
+### Instalação a partir do Código Fonte
 
 ```bash
 # Clone o repositório
-git clone <url-do-repositório>
+git clone https://github.com/felipechierice/todo-tui.git
 cd todo-tui
 
 # Instalar dependências
@@ -76,16 +108,6 @@ pnpm build
 
 # Link globalmente
 npm link
-```
-
-Após isso, você pode usar o comando `todo` de qualquer lugar:
-
-```bash
-# Usar arquivo padrão
-todo
-
-# Especificar arquivo customizado
-todo ~/meu-todo.md
 ```
 
 ### Desenvolvimento
